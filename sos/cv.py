@@ -94,7 +94,7 @@ def runCV():
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
             frame_num += 1
-
+            
         else:
             break
     capture.release()

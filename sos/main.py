@@ -2,6 +2,8 @@ from flask import Flask, render_template, url_for, redirect, request
 from flask import Blueprint
 from .extensions import mongo
 
+from .cv import runCV
+
 main = Blueprint('main', __name__)
 
 @main.route("/")
@@ -27,4 +29,9 @@ def updateRescueDB():
     address = request.form['address']
     # user_collection = mongo.db.users
     # user_collection.insert({'name' : name, 'number' : number, 'address' ; address})
+    return redirect('/volunteer')
+
+@main.route("/runCV")
+def runProgram():
+    runCV()
     return redirect('/volunteer')

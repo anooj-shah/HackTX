@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js">
+
 <head>
     <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
     <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
         }
 
@@ -19,7 +21,7 @@
 {% include 'head.html' %}
 
 <body>
-    <p hidden id='posts'>{{ posts }}</p>
+    <p id='posts'>{{ posts }}</p>
     {% include 'header.html' %}
     <div style="margin: 20px">
         <div class="container">
@@ -56,24 +58,24 @@
         //Wait until the map resources are ready.
         map.events.add('ready', function () {
             var pins = JSON.parse(posts);
-        pins.forEach(function (pin) {
-            //Create a HTML marker and add it to the map.
-            var marker = new atlas.HtmlMarker({
-                color: 'DodgerBlue',
-                text: pin.text,
-                position: [pin.long, pin.lat],
-                popup: new atlas.Popup({
-                    content: '<div style="padding:10px">' + pin.message + '</div>',
-                    pixelOffset: [0, -30]
-                })
-            });
+            pins.forEach(function (pin) {
+                //Create a HTML marker and add it to the map.
+                var marker = new atlas.HtmlMarker({
+                    color: 'DodgerBlue',
+                    text: pin.text,
+                    position: [pin.long, pin.lat],
+                    popup: new atlas.Popup({
+                        content: '<div style="padding:10px">' + pin.text + ' people' + '</div>' + '<div style="padding:10px">' + pin.message + '</div>' + '<div style="padding:10px">' + 'Flood' + '</div>' + '<div style="padding:10px">' + 'Supplies Needed: canoe' + '</div>',
+                        pixelOffset: [0, -30],
+                    })
+                });
 
-            map.markers.add(marker);
-            //Add a click event to toggle the popup.
-            map.events.add('click',marker, () => {
-                marker.togglePopup();
+                map.markers.add(marker);
+                //Add a click event to toggle the popup.
+                map.events.add('click', marker, () => {
+                    marker.togglePopup();
+                });
             });
-        });
             // //Create a HTML marker and add it to the map.
             // var marker = new atlas.HtmlMarker({
             //     color: 'DodgerBlue',
@@ -108,7 +110,7 @@
             // map.events.add('click',marker2, () => {
             //     marker2.togglePopup();
             // });
-                /* Construct and add a compass control*/
+            /* Construct and add a compass control*/
             var compassControl = new atlas.control.CompassControl();
             map.controls.add(compassControl, {
                 position: "bottom-right"
@@ -129,11 +131,11 @@
             /* Construct and add a style control*/
             var styleControl = new atlas.control.StyleControl();
             map.controls.add(styleControl, {
-            position: "bottom-right"
+                position: "bottom-right"
             })
         });
     </script>
-    
+
     {% include 'footer.html' %}
 
 </body>

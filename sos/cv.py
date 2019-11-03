@@ -14,7 +14,7 @@ import geocoder
 from PIL import Image
 import random
 
-def runCV():
+def runCV(webcam):
     data = []
     # Add your Computer Vision subscription key to your environment variables.
     if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
@@ -25,8 +25,11 @@ def runCV():
     if 'COMPUTER_VISION_ENDPOINT' in os.environ:
         endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 
-    video_name = 'overpeople.mp4'
-    capture = cv2.VideoCapture(0)
+    video_name = 'man.mp4'
+    if webcam:
+        capture = cv2.VideoCapture(0)
+    else:
+        capture = cv2.VideoCapture(video_name)
 
     # Check if camera opened successfully
     if (capture.isOpened()== False): 

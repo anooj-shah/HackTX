@@ -40,9 +40,17 @@ def updateRescueDB():
     # user_collection.insert({'name' : name, 'number' : number, 'address' ; address})
     return redirect('/volunteer')
 
-@main.route("/runCV")
-def runProgram():
-    data = runCV()
+@main.route("/runCVwebcam")
+def runWebcam():
+    data = runCV(True)
+    user_collection = mongo.db.users
+    for x in data:
+        user_collection.insert(x)
+    return redirect('/volunteer')
+
+@main.route("/runCVvid")
+def runVid():
+    data = runCV(False)
     user_collection = mongo.db.users
     for x in data:
         user_collection.insert(x)

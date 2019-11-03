@@ -12,13 +12,9 @@ def home():
     # return '<h1>Added a user!</h1>'
     return render_template('index.html')
 
-@main.route("/map")
-def map():
-    return render_template('map.html')
-
 @main.route("/volunteer")
 def volunteer():
-    return render_template('volunteer.html')
+    return render_template('map.html')
 
 @main.route("/helpMe")
 def helpMe():
@@ -31,4 +27,4 @@ def updateRescueDB():
     address = request.form['address']
     # user_collection = mongo.db.users
     # user_collection.insert({'name' : name, 'number' : number, 'address' ; address})
-    return redirect('/map')
+    return redirect('/volunteer')

@@ -108,6 +108,29 @@
             // map.events.add('click',marker2, () => {
             //     marker2.togglePopup();
             // });
+                /* Construct and add a compass control*/
+            var compassControl = new atlas.control.CompassControl();
+            map.controls.add(compassControl, {
+                position: "bottom-right"
+            });
+
+            /* Construct and add a zoom control*/
+            var zoomControl = new atlas.control.ZoomControl();
+            map.controls.add(zoomControl, {
+                position: "bottom-right"
+            });
+
+            /* Construct and add a pitch control*/
+            var pitchControl = new atlas.control.PitchControl();
+            map.controls.add(pitchControl, {
+                position: "bottom-right"
+            });
+
+            /* Construct and add a style control*/
+            var styleControl = new atlas.control.StyleControl();
+            map.controls.add(styleControl, {
+            position: "bottom-right"
+            })
         });
     </script>
     

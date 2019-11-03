@@ -91,6 +91,8 @@ def runCV(webcam):
 
             # Display the resulting frame.
             cv2.imshow('Frame',frame)
+            cv2.rectangle(cur_frame, (0, 10), (0+1750, 10+55), (255, 255, 255), -1)
+            cv2.putText(cur_frame, image_caption, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), thickness=1,lineType=cv2.LINE_AA)
             if frame_num % frame_increment == 0:
                 cv2.imshow("Cur_Frame",cur_frame)
             # Press Q on keyboard to  exit

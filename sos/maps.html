@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <meta charset="utf-8">
+
+    <!-- Ensures that IE and Edge uses the latest version and doesn't emulate an older version -->
+    <meta http-equiv="x-ua-compatible" content="IE=Edge">
+
+    <!-- Ensures the web page looks good on all screen sizes. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+        }
+
+        #myMap {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+<body>
+    <div id="myMap"></div>
+
+    <script type="text/javascript">
+        //Create an instance of the map control and set some options.
+        var map = new atlas.Map('myMap', {
+            center: [-97.743590, 30.285830],
+            zoom: 13,
+            language: 'en-US',
+            authOptions: {
+                authType: 'subscriptionKey',
+                subscriptionKey: 'Iuygs_ANd0cj_WCgNIPaa_STbPnJyBY3cWnV2p7yZek'
+            }
+        });
+        //Wait until the map resources are ready.
+        map.events.add('ready', function () {
+
+            //Create a HTML marker and add it to the map.
+            var marker = new atlas.HtmlMarker({
+                color: 'DodgerBlue',
+                text: '10',
+                position: [-97.743591, 30.285830],
+                popup: new atlas.Popup({
+                    content: '<div style="padding:10px">Hi!!</div>',
+                    pixelOffset: [0, -30]
+                })
+            });
+
+            //Create a HTML marker and add it to the map.
+            var marker2 = new atlas.HtmlMarker({
+                color: 'DodgerBlue',
+                text: '10',
+                position: [-97.743591, 30.28111],
+                popup: new atlas.Popup({
+                    content: '<div style="padding:10px">Hi2!!</div>',
+                    pixelOffset: [0, -30]
+                })
+            });
+
+            map.markers.add(marker);
+            map.markers.add(marker2);
+
+
+            //Add a click event to toggle the popup.
+            map.events.add('click',marker, () => {
+                marker.togglePopup();
+            });
+
+            map.events.add('click',marker2, () => {
+                marker2.togglePopup();
+            });
+        });
+    </script>
+</body>
+</html>

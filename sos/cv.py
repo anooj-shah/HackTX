@@ -42,7 +42,7 @@ def runCV():
         if ret == True:
             if frame_num % frame_increment == 0:
                 cur_frame = frame.copy()
-                cv2.imwrite("image.jpg", cur_frame);
+                cv2.imwrite("image.jpg", cur_frame)
                 # Azure
                 analyze_url = endpoint + "vision/v2.1/analyze"
                 # Set image_path to the local path of an image that you want to analyze.

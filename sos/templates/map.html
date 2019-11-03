@@ -19,6 +19,7 @@
 {% include 'head.html' %}
 
 <body>
+    <p hidden id='posts'>{{ posts }}</p>
     {% include 'header.html' %}
     <div style="margin: 20px">
         <div class="container">
@@ -47,48 +48,69 @@
             language: 'en-US',
             authOptions: {
                 authType: 'subscriptionKey',
-                subscriptionKey: 'reee'
+                subscriptionKey: 'Iuygs_ANd0cj_WCgNIPaa_STbPnJyBY3cWnV2p7yZek'
             }
         });
+
+        var posts = document.getElementById("posts").textContent;
         //Wait until the map resources are ready.
         map.events.add('ready', function () {
-
+            var pins = JSON.parse(posts);
+        pins.forEach(function (pin) {
             //Create a HTML marker and add it to the map.
             var marker = new atlas.HtmlMarker({
                 color: 'DodgerBlue',
-                text: '10',
-                position: [-97.743591, 30.285830],
+                text: pin.text,
+                position: [pin.long, pin.lat],
                 popup: new atlas.Popup({
-                    content: '<div style="padding:10px">Hi!!</div>',
-                    pixelOffset: [0, -30]
-                })
-            });
-
-            //Create a HTML marker and add it to the map.
-            var marker2 = new atlas.HtmlMarker({
-                color: 'DodgerBlue',
-                text: '10',
-                position: [-97.743591, 30.28111],
-                popup: new atlas.Popup({
-                    content: '<div style="padding:10px">Hi2!!</div>',
+                    content: '<div style="padding:10px">' + pin.message + '</div>',
                     pixelOffset: [0, -30]
                 })
             });
 
             map.markers.add(marker);
-            map.markers.add(marker2);
-
-
             //Add a click event to toggle the popup.
             map.events.add('click',marker, () => {
                 marker.togglePopup();
             });
+        });
+            // //Create a HTML marker and add it to the map.
+            // var marker = new atlas.HtmlMarker({
+            //     color: 'DodgerBlue',
+            //     text: '10',
+            //     position: [-97.743591, 30.285830],
+            //     popup: new atlas.Popup({
+            //         content: '<div style="padding:10px">Hi!!</div>',
+            //         pixelOffset: [0, -30]
+            //     })
+            // });
 
-            map.events.add('click',marker2, () => {
-                marker2.togglePopup();
-            });
+            // //Create a HTML marker and add it to the map.
+            // var marker2 = new atlas.HtmlMarker({
+            //     color: 'DodgerBlue',
+            //     text: '10',
+            //     position: [-97.743591, 30.28111],
+            //     popup: new atlas.Popup({
+            //         content: '<div style="padding:10px">Hi2!!</div>',
+            //         pixelOffset: [0, -30]
+            //     })
+            // });
+
+            // map.markers.add(marker);
+            // map.markers.add(marker2);
+
+
+            // //Add a click event to toggle the popup.
+            // map.events.add('click',marker, () => {
+            //     marker.togglePopup();
+            // });
+
+            // map.events.add('click',marker2, () => {
+            //     marker2.togglePopup();
+            // });
         });
     </script>
+    
     {% include 'footer.html' %}
 
 </body>

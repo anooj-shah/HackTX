@@ -12,6 +12,7 @@ import cv2
 import json
 import geocoder
 from PIL import Image
+import random
 
 def runCV():
     data = []
@@ -73,11 +74,17 @@ def runCV():
                     print(image_caption+"\n")
 
                 g = geocoder.ip('me')
+                # temp = []
+                # temp.append(g.latlng[0] + random.uniform(-0.001,0.001) + 5.7525)
+                # temp.append(g.latlng[1] + random.uniform(-0.001,0.001) + 4.2559)
+                print((g.latlng[0] + random.uniform(-0.001,0.001) + 5.7525))
+                print(g.latlng[1] + random.uniform(-0.001,0.001) + 4.2559)
                 print("There are", num_people, "people in the frame")
                 data.append({})
-                data[len(data)-1]['location'] = g.latlng
-                data[len(data)-1]['people'] = num_people
-                data[len(data)-1]['transportation'] = image_caption
+                data[len(data)-1]['lat'] = g.latlng[0] + random.uniform(-0.001,0.001) - 1.7302
+                data[len(data)-1]['long'] = g.latlng[1] + random.uniform(-0.001,0.001) + 4.3348
+                data[len(data)-1]['text'] = str(num_people)
+                data[len(data)-1]['message'] = image_caption
 
             # Display the resulting frame.
             cv2.imshow('Frame',frame)
@@ -93,5 +100,4 @@ def runCV():
     capture.release()
     cv2.destroyAllWindows()
 
-    dronejson = json.dumps(data)
-    print(dronejson)
+    return data

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request
 from flask import Blueprint
 from .extensions import mongo
+import json
 
 from .cv import runCV
 
@@ -9,14 +10,22 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-    # user_collection = mongo.db.users
-    # user_collection.insert({'name' : 'johnCena'})
-    # return '<h1>Added a user!</h1>'
     return render_template('index.html')
 
 @main.route("/volunteer")
 def volunteer():
-    return render_template('map.html')
+    posts = []
+    user_collection = mongo.db.users
+    for doc in user_collection.find({}, { '_id': 0 }):
+        posts.append(doc)
+    # print(info)
+    posts = json.dumps(posts)
+    # posts = 'hi'
+    # print(user_collection.find_one())
+    # temp = json.dumps(user_collection.find_one())
+    # print(posts)
+    # print('te')
+    return render_template('map.html', posts=posts)
 
 @main.route("/helpMe")
 def helpMe():
@@ -33,5 +42,8 @@ def updateRescueDB():
 
 @main.route("/runCV")
 def runProgram():
-    runCV()
+    data = runCV()
+    user_collection = mongo.db.users
+    for x in data:
+        user_collection.insert(x)
     return redirect('/volunteer')

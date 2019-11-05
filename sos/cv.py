@@ -84,6 +84,8 @@ def runCV(webcam):
                 print(g.latlng[1] + random.uniform(-0.001,0.001) + 4.2559)
                 print("There are", num_people, "people in the frame")
                 data.append({})
+                # data[len(data)-1]['lat'] = 30.6 + random.uniform(-0.001,0.001)
+                # data[len(data)-1]['long'] = -96.34 + random.uniform(-0.001,0.001)
                 data[len(data)-1]['lat'] = g.latlng[0] + random.uniform(-0.001,0.001) - 1.7302
                 data[len(data)-1]['long'] = g.latlng[1] + random.uniform(-0.001,0.001) + 4.3348
                 data[len(data)-1]['text'] = str(num_people)
@@ -99,7 +101,7 @@ def runCV(webcam):
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
             frame_num += 1
-            
+
         else:
             break
     capture.release()

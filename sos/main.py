@@ -33,11 +33,14 @@ def helpMe():
 
 @main.route("/helpMe", methods=["POST"])
 def updateRescueDB():
-    name = request.form['name']
-    number = request.form['number']
-    address = request.form['address']
-    # user_collection = mongo.db.users
-    # user_collection.insert({'name' : name, 'number' : number, 'address' ; address})
+    lat = request.form['lat']
+    lon = request.form['long']
+    message = request.form['message']
+    text = request.form['text']
+    print(lat, lon, message, text)
+    user_collection = mongo.db.users
+    user_collection.insert({'lat' : lat, 'long' : lon, 'message' : message, 'text' : text})
+    # return redirect('/volunteer')
     return redirect('/volunteer')
 
 @main.route("/runCVwebcam")

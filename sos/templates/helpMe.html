@@ -297,9 +297,13 @@ textarea.input3 {
   display: none;
 }
     </style>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
         function clicked() {
-            alert('Rescue request sent. Be safe in the mean time.')
+        $('#name').val('1');
+        $('#number').val("HELP!");
+        $('#address').val(30.2672);
+        $('#long').val(-97.7431);
         }
 
     </script>
@@ -309,26 +313,28 @@ textarea.input3 {
 	<div class="bg-contact3">
 		<div class="container-contact3">
 			<div class="wrap-contact3">
-				<form method="POST">
+				<form id="myForm" method="POST">
 					<span class="contact3-form-title">
                         Rescue Me
                         <h6>Put your location on the map</h6>
                     </span>
 
 					<div class="wrap-input3 validate-input" data-validate="Name is required">
-						<input class="input3" type="text" name="name" placeholder="Your Name">
+						<input id="name" class="input3" type="text" name="text" placeholder="Your Name">
 						<span class="focus-input3"></span>
 					</div>
 
 					<div class="wrap-input3 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input3" type="text" name="number" placeholder="Your Phone Number">
+						<input id="number" class="input3" type="text" name="message" placeholder="Your Phone Number">
 						<span class="focus-input3"></span>
                     </div>
 
                     <div class="wrap-input3 validate-input" data-validate = "Valid address required">
-                            <input class="input3" type="text" name="address" placeholder="Address">
+                            <input id="address" class="input3" type="text" name="lat" placeholder="Address">
                             <span class="focus-input3"></span>
                     </div>
+                    <input hidden id="long" class="input3" type="text" name="long" placeholder="Address">
+
 
 					<div class="container-contact3-form-btn">
 						<button class="contact3-form-btn submitBtn" type="submit" onclick="clicked()" value="Submit">
@@ -338,7 +344,7 @@ textarea.input3 {
 				</form>
 			</div>
 		</div>
-	</div>
+  </div>
 {% include 'footer.html' %}
 </body>
     

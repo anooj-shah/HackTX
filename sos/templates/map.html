@@ -5,6 +5,7 @@
     <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
     <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
     <style>
         html,
@@ -21,31 +22,46 @@
 {% include 'head.html' %}
 
 <body>
-    <p id='posts'>{{ posts }}</p>
+    <p hidden id='posts'>{{ posts }}</p>
     {% include 'header.html' %}
     <div style="margin: 20px">
         <div class="container">
             <div class="row">
                 <div id="myMap" class="col-md-8 mb-5 mb-md-0"> </div>
                 <div class="col-md-4 text-center align-self-center">
-                    <form method="POST">
                         <div>
                             <p class="headers">Zip Code:</p>
-                            <input id="zipCode" name="zipCode" oninput="showSubmitBtn()">
+                            <input id="zipCode" name="zipCode">
                         </div>
                         <br>
                         <div>
-                            <button class="submitBtn" type="submit" value="Submit">Filter</button>
+                            <button class="submitBtn" type="submit" onclick="clicked()" value="Submit">Filter</button>
                         </div>
-                    </form>
                 </div>
             </div><!-- .row close -->
         </div><!-- .container close -->
     </div><!-- header close -->
     <script type="text/javascript">
+    function clicked() {
+        if ($('#zipCode').val() === "78712") {
+            lat = (sessionStorage.setItem('lat', 30.2672));
+            lon = (sessionStorage.setItem('lon', -97.7431));
+        }
+        else if ($('#zipCode').val() === "77840") {
+            lat = (sessionStorage.setItem('lat', 30.6280));
+            lon = (sessionStorage.setItem('lon', -96.3344));
+        }
+        location.reload();
+    }
+        var lat = 30.285830;
+        var lon = -97.743590;
+        if (performance.navigation.type == 1) {
+            lat = parseFloat(sessionStorage.getItem('lat'));
+            lon = parseFloat(sessionStorage.getItem('lon'));
+  }
         //Create an instance of the map control and set some options.
         var map = new atlas.Map('myMap', {
-            center: [-97.743590, 30.285830],
+            center: [lon, lat],
             zoom: 13,
             language: 'en-US',
             authOptions: {
